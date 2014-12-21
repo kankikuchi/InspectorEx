@@ -28,16 +28,21 @@ public class SetMonsterStatusEditor : Editor
 
 
 		//HPはどのタイプでも設定
-		monster.HP = EditorGUILayout.FloatField ("体力", monster.HP);
+		monster.HP = Mathf.Max(1, EditorGUILayout.FloatField ("体力", monster.HP));
 
 		//戦士はMPが0なので設定しない
 		if(monster.Type != SetMonsterStatus.MonsterType.Warrior){
-			monster.MP = EditorGUILayout.FloatField ("マジックポイント", monster.MP);
+			monster.MP = Mathf.Max(0, EditorGUILayout.FloatField ("マジックポイント", monster.MP));
 		}
 
 		//ドラゴンのパワーは固定なので設定しない
 		if(monster.Type != SetMonsterStatus.MonsterType.Dragon){
-			monster.Power = EditorGUILayout.FloatField ("パワー！", monster.Power);
+			monster.Power = Mathf.Max(1, EditorGUILayout.FloatField ("パワー！", monster.Power));
+		}
+
+		//魔法使いはMP >= HP
+		if(monster.Type == SetMonsterStatus.MonsterType.Witch){
+			monster.MP = Mathf.Max (monster.MP, monster.HP);
 		}
 
 		EditorUtility.SetDirty( target );

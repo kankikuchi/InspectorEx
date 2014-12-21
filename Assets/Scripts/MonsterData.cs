@@ -9,6 +9,7 @@ public class MonsterData : ScriptableObject
 	[System.SerializableAttribute]
 	public class Param
 	{
+		public string GameObjectName;
 		public SetMonsterStatus.MonsterType Type;
 		public float HP, MP ,Power;
 		public Vector3    Position;
