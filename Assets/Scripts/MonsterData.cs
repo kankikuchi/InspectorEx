@@ -9,7 +9,7 @@ public class MonsterData : ScriptableObject
 	[System.SerializableAttribute]
 	public class Param
 	{
-		SetMonsterStatus.MonsterType Type;
+		public SetMonsterStatus.MonsterType Type;
 		public float HP, MP ,Power;
 		public Vector3    Position;
 		public Quaternion Rotation;
