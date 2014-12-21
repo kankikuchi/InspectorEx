@@ -2,27 +2,27 @@
 using System.Collections;
 using UnityEditor;
 
-[CustomEditor (typeof(Monster))]
-public class MonsterEditor : Editor
+[CustomEditor (typeof(SetMonsterStatus))]
+public class SetMonsterStatusEditor : Editor
 {
 
 	public override void OnInspectorGUI() {
-		Monster monster = target as Monster;
+		SetMonsterStatus monster = target as SetMonsterStatus;
 
 		//入力されたモンスターの種類を設定
-		monster.Type = (Monster.MonsterType)EditorGUILayout.EnumPopup( "モンスターの種類", monster.Type);
+		monster.Type = (SetMonsterStatus.MonsterType)EditorGUILayout.EnumPopup( "モンスターの種類", monster.Type);
 
 		//共通の注記
 		EditorGUILayout.HelpBox("体力とパワーは0に設定できません。", MessageType.Info, true );
 
 		//各タイプ毎に注記を表示
-		if(monster.Type == Monster.MonsterType.Warrior){
+		if(monster.Type == SetMonsterStatus.MonsterType.Warrior){
 			EditorGUILayout.HelpBox("Warriorは魔法が使えないのマジックポイントは設定できません", MessageType.Info, true );
 		}
-		else if(monster.Type == Monster.MonsterType.Witch){
+		else if(monster.Type == SetMonsterStatus.MonsterType.Witch){
 			EditorGUILayout.HelpBox("Witchはマジックポイントを0にできません。\nまた、体力より低いマジックポイントも設定できません。", MessageType.Info, true );
 		}
-		else if(monster.Type == Monster.MonsterType.Dragon){
+		else if(monster.Type == SetMonsterStatus.MonsterType.Dragon){
 			EditorGUILayout.HelpBox("Dragonのパワーは固定なので設定できません", MessageType.Info, true );
 		}
 
@@ -31,12 +31,12 @@ public class MonsterEditor : Editor
 		monster.HP = EditorGUILayout.FloatField ("体力", monster.HP);
 
 		//戦士はMPが0なので設定しない
-		if(monster.Type != Monster.MonsterType.Warrior){
+		if(monster.Type != SetMonsterStatus.MonsterType.Warrior){
 			monster.MP = EditorGUILayout.FloatField ("マジックポイント", monster.MP);
 		}
 
 		//ドラゴンのパワーは固定なので設定しない
-		if(monster.Type != Monster.MonsterType.Dragon){
+		if(monster.Type != SetMonsterStatus.MonsterType.Dragon){
 			monster.Power = EditorGUILayout.FloatField ("パワー！", monster.Power);
 		}
 
